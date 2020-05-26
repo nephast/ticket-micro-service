@@ -27,4 +27,4 @@ spec:
     - name: auth
       protocol: TCP
       port: 3000
-      targerPort: 3000
+      targetPort: 3000
