@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+//TODO use errors fields to show them next to the incorrect field
+
 export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,7 +41,6 @@ export default () => {
           className="form-control"
         />
       </div>
-      //TODO use errors fields to show them next to the incorrect field
       {errors.length > 0 && (
         <div className="alert alert-danger">
           <h4>Oooops...</h4>
