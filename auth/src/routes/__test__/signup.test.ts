@@ -34,3 +34,33 @@ it('return a 400 with invalid password', async () => {
 it('return a 400 with invalid request', async () => {
   return request(app).post('/api/users/signup').send({}).expect(400);
 });
+
+it('disallows duplicates emails', async () => {
+  await request(app)
+    .post('/api/users/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+    })
+    .expect(201);
+
+  await request(app)
+    .post('/api/users/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+    })
+    .expect(400);
+});
+
+it('sets a cookie after succefull signup', async () => {
+  const resp = await request(app)
+    .post('/api/users/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+    })
+    .expect(201);
+
+  expect(resp.get('Set-Cookie')).toBeDefined();
+});
